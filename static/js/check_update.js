@@ -9,7 +9,7 @@ if (document.getElementById("gplus-check-update")) {
       if (versionCompare(gplusVersion, obj.tag_name) == -1) {
         container.innerHTML = "<h2>🎉 发现新版本！</h2>" + '<a href="https://github.com/happyet/Gplus/archive/refs/tags/' + obj.tag_name + '.zip" target="_blank">点击下载（' + obj.tag_name + '）</a>';
       } else {
-        container.innerHTML = "您目前使用的是最新版主题。";
+        container.innerHTML = "<p>您目前使用的是最新版主题。</p>";
       }
     }
   };
