@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
 		$('#s').focus();
 		if($('.site-nav').hasClass('on')) $('.site-nav').removeClass('on');
 	});
-	$('.entry a:has(img)').addClass("thickbox");
+	window.ViewImage && ViewImage.init('.entry img');
 	//  点赞按钮点击
 	$('#agree').on('click', function () {
 		if($(this).prop('disabled') == true){
@@ -47,6 +47,7 @@ jQuery(document).ready(function($){
 	});
 	$('#realavatar').on('click',function(){
 		$('#cabg').show();
+		$('#comment_form').removeClass('loft-inner');
 		$('#commentauthorinfo').fadeIn(500);
 	});
 	$('#caok').on('click',function(){
@@ -77,6 +78,7 @@ jQuery(document).ready(function($){
 	});
 	$('#commentauthorinfo .close,#cabg').on('click',function(){
 		$('#commentauthorinfo').hide();
+		$('#comment_form').addClass('loft-inner');
 		$('#cabg').hide();
 	});
 	$('#comment').focus(function(){
