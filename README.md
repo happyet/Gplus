@@ -1,5 +1,7 @@
 # Typecho 仿 G+ 轻博客主题
 
+## 现在完解压后如果文件夹名为 `Gplus-main` 的，请更名为 `Gplus`
+
 - 自适应
 - 自定义显示分类、页面或全部内容导航
 - 可选择漂浮背景
@@ -13,7 +15,7 @@
 - 侧边栏活跃评论网友
 - 侧边栏最新评论显示头像
 - 前台登录，在页脚
-- 带链接文章图片 thickbox 放大功能
+- 文章图片 view-image 放大功能
 。。。。。
 
-主题地址：https://lms.im/theme/typecho-theme-gplus.html
+主题地址：https://muxer.cn/theme/typecho-theme-gplus.html
