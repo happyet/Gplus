@@ -6,12 +6,17 @@ function threadedComments($comments, $singleCommentOptions) {
 			$commentbyAuthor = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" id="woo_svg_vgold"><path fill="#FDFF5D" d="M93 50C93 26 74 7 50 7S7 26 7 50s19 43 43 43c23 0 43-20 43-43zM0 50C0 22 22 0 50 0s50 22 50 50-22 50-50 50S0 77 0 50z"></path><path fill="#E21D02" d="M93 50C93 26 74 7 50 7S7 26 7 50s19 43 43 43c23 0 43-20 43-43z"></path><path fill="none" stroke="#CF2F00" stroke-width=".5" d="M26 33h10l14 29 14-29h10L55 74H45z"></path><path fill="#FEFF5D" d="M26 33h10l14 29 14-29h10L55 74H45z"></path></svg>';
 		}
 	}
+	if ($comments->url) {
+        $author = '<a href="' . $comments->url . '" target="_blank"' . ' rel="external nofollow">' . $comments->author . '</a>';
+    } else {
+        $author = $comments->author;
+    }
 	if($comments->levels > 0){
 ?>
 	<li id="<?php $comments->theId(); ?>" class="comment comment-body comment-child<?php $comments->levelsAlt(' comment-level-odd', ' comment-level-even');?>">
 		<div class="comment-meta loft-head">
 			<img alt="commenter-avatar" src="<?php getAvatarByEmail($comments->mail,25); ?>" class="avatar photo" height="25" width="25">
-			<span class="fn"><?php $comments->author(); ?><?php echo $commentbyAuthor; ?></span>
+			<span class="fn"><?php echo $author; ?><?php echo $commentbyAuthor; ?></span>
 			<time class="comment-time" datetime="<?php $comments->date('c'); ?>"><?php $comments->date('Y-m-d H:i'); ?></time>
 			<span class="comment-reply-link"><?php $comments->reply('回复'); ?></span>
 		</div>
@@ -32,7 +37,7 @@ function threadedComments($comments, $singleCommentOptions) {
 				<div class="comment-meta loft-head">
 					<span class="loft-img"><img alt="commenter-avatar" src="<?php getAvatarByEmail($comments->mail,50); ?>" class="avatar photo" height="50" width="50"><?php echo $commentbyAuthor; ?></span>
 					<div class="commenter-title">
-						<span class="fn"><?php $comments->author(); ?></span>
+						<span class="fn"><?php echo $author; ?></span>
 						<time class="comment-time" datetime="<?php $comments->date('c'); ?>"><?php $comments->date('Y-m-d H:i'); ?></time>
 					</div>
 					<button role="button" class="comment-reply-link loft-btn" title="回复"><?php $comments->reply('回复'); ?></button>
@@ -56,7 +61,6 @@ function threadedComments($comments, $singleCommentOptions) {
 		<div id="<?php $this->respondId(); ?>" class="respond loft">
 			<div id="reply-title" class="comment-title line-title"><span>新评论</span></div>
 			<form method="post" action="<?php $this->commentUrl() ?>" id="comment_form" class="loft-inner">
-				<div id="cabg"></div>
 				<div id="commentauthorinfo">
 					<button id="close" class="close" type="button">X</button>
 					<?php if($this->user->hasLogin()): ?>
@@ -76,7 +80,7 @@ function threadedComments($comments, $singleCommentOptions) {
 						<img alt="" src="<?php getAvatarByEmail($this->remember('mail',true)); ?>" class="avatar photo" height="50" width="50">
 					<?php endif; ?>
 				</div>
-				<textarea id="comment" class="txt" name="text" tabindex="4"><?php $this->remember('text'); ?></textarea>		
+				<textarea id="comment" class="txt" name="text" tabindex="4" placeholder="点击右侧头像或者输入评论后点击发布评论输入用户信息。"><?php $this->remember('text'); ?></textarea>		
 				<p style="text-align:right;">
 					<?php $comments->cancelReply(); ?>
 					<input class="submit" name="submit" type="submit" id="submit" tabindex="5" value="发布评论">
@@ -86,8 +90,6 @@ function threadedComments($comments, $singleCommentOptions) {
 			</form>
 		</div>
 	</div>
-<?php else: ?>
-	<p class="comment-title line-title"><span>评论已关闭</span></p>
 <?php endif; ?>
 
 <?php if ($comments->have()): ?>
@@ -95,5 +97,5 @@ function threadedComments($comments, $singleCommentOptions) {
 	<?php $comments->listComments(); ?>
 	<div class="post-navigation"><?php $comments->pageNav(); ?></div>
 <?php else: ?>
-	<p class="comment-title line-title"><span>暂无评论</span></p>
+	<?php if($this->allow('comment')): ?><p class="comment-title line-title"><span>暂无评论</span></p><?php endif; ?>
 <?php endif; ?>

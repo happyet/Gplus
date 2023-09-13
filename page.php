@@ -26,7 +26,7 @@ include('header.php');
 				</header>
 				<div class="post-content loft-body">
 					<div class="entry">
-						<?php $this->content('阅读全文...'); ?>
+						<?php echo handleContent($this->content); ?>
 					</div>
 				</div>
 				<footer class="post-footer loft-foot">

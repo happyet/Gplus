@@ -5,11 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-	<title><?php $this->archiveTitle(array('category'=>_t(' %s '),'search'=>_t(' %s '),'tag'=>_t(' %s '),'author'=>_t(' %s ')), '', ' - ');?> <?php $this->options->title();?> - <?php $this->options->description() ?></title>
+	<title><?php $this->archiveTitle(array('category'=>_t(' %s '),'search'=>_t(' %s '),'tag'=>_t(' %s '),'author'=>_t(' %s ')), '', ' - ');?><?php $this->options->title();?><?php if($this->options->description) echo ' - ' . $this->options->description; ?></title>
     <link rel="stylesheet" type="text/css" media="screen" href="<?php $this->options->themeUrl('style.css'); ?>" />
-	<?php if ($this->is('post')): ?>
-		<link rel="stylesheet" type="text/css" media="screen" href="<?php $this->options->themeUrl('/static/thickbox/thickbox.css'); ?>" />
-	<?php endif; ?>
 	<script type="text/javascript" src="<?php $this->options->themeUrl('/static/js/jquery.min.js '); ?>"></script>
     <?php $this->header(); ?>
 </head>

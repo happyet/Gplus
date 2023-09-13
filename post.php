@@ -19,7 +19,7 @@ include('header.php');
 				<header class="post-header loft-head">
 					<a itemprop="name" class="loft-img" href="<?php $this->author->permalink(); ?>" rel="author"><img class="avatar" src="<?php getAvatarByEmail($this->author->mail,50); ?>" alt="<?php $this->author->screenName(); ?>" width="48" height="48" /><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" id="woo_svg_vgold"><path fill="#FDFF5D" d="M93 50C93 26 74 7 50 7S7 26 7 50s19 43 43 43c23 0 43-20 43-43zM0 50C0 22 22 0 50 0s50 22 50 50-22 50-50 50S0 77 0 50z"></path><path fill="#E21D02" d="M93 50C93 26 74 7 50 7S7 26 7 50s19 43 43 43c23 0 43-20 43-43z"></path><path fill="none" stroke="#CF2F00" stroke-width=".5" d="M26 33h10l14 29 14-29h10L55 74H45z"></path><path fill="#FEFF5D" d="M26 33h10l14 29 14-29h10L55 74H45z"></path></svg></a>
 					<div class="post-title">
-						<h2><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>
+						<h2><?php $this->title() ?></h2>
 						<span><time datetime="<?php $this->date('c'); ?>"><?php $this->date('Y-m-d'); ?></time></span>
 						<span class="category"><?php $this->category(','); ?></span>
 					</div>
@@ -27,9 +27,9 @@ include('header.php');
 				</header>
 				<div class="post-content loft-body">
 					<div class="entry">
-						<?php $this->content('阅读全文...'); ?>
+						<?php echo handleContent($this->content); ?>
 					</div>
-					<p class="tag">标签: <?php $this->tags(', ', true, 'none'); ?></p>
+					<?php if($this->tags){ ?><p class="tag">标签: <?php $this->tags(', ', true, 'none'); ?></p><?php } ?>
 				</div>
 				<footer class="post-footer loft-foot">
 					<?php $agree = $this->hidden?array('agree' => 0, 'recording' => true):agreeNum($this->cid); ?>
@@ -40,9 +40,9 @@ include('header.php');
 			</div>
 		</article>
 	<?php endwhile; ?>
-	<nav class="article-nav">
-        <span class="article-nav-prev">上一篇<?php $this->thePrev(); ?></span>
-        <span class="article-nav-next">下一篇<?php $this->theNext(); ?></span>
+	<nav class="article-nav loft-inner">
+        <div class="article-nav-prev"><span>上一篇</span><?php $this->thePrev('%s','没有了'); ?></div>
+        <div class="article-nav-next"><span>下一篇</span><?php $this->theNext('%s','没有了'); ?></div>
     </nav>
 	<?php include('comments.php'); ?>
 </div>

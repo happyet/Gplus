@@ -1,11 +1,12 @@
 <?php
 /**
  * Typecho 仿老版本 g+ 主题
- * 
- * @package G-plus 
+ * Github：<a href="https://github.com/happyet/Gplus" target="_blank" title="Gplus Github Repo">https://github.com/happyet/Gplus</a>
+ *
+ * @package Gplus 
  * @author LMS
- * @version 2.0.0
- * @link https://lms.im/theme/typecho-theme-gplus.html
+ * @version 1.0.0
+ * @link https://muxer.cn/theme/typecho-theme-gplus.html
  */
  
  include('header.php'); ?>
@@ -26,14 +27,7 @@
 				<div class="post-content loft-body">
 					<div class="entry">
 						<?php post_thumb($this); ?>
-						<?php
-							if (false !== strpos($this->text, '<!--more-->')) {
-								echo str_replace('<p></br></p>', '', $this->excerpt);
-							} else {
-								$str = preg_replace('/<script>.*?<\/script>/is', '', $this->excerpt);
-								echo '<p>'.Typecho_Common::subStr(strip_tags($str), 0, '120', '...').'</p>';
-							} 
-						?>
+						<p><?php $this->excerpt(120, "..."); ?></p>
 					</div>
 				</div>
 				<footer class="post-footer loft-foot">
