@@ -19,7 +19,7 @@
 					<a itemprop="name" class="loft-img" href="<?php $this->author->permalink(); ?>" rel="author"><img class="avatar" src="<?php getAvatarByEmail($this->author->mail,50); ?>" alt="<?php $this->author->screenName(); ?>" width="48" height="48" /><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" id="woo_svg_vgold"><path fill="#FDFF5D" d="M93 50C93 26 74 7 50 7S7 26 7 50s19 43 43 43c23 0 43-20 43-43zM0 50C0 22 22 0 50 0s50 22 50 50-22 50-50 50S0 77 0 50z"></path><path fill="#E21D02" d="M93 50C93 26 74 7 50 7S7 26 7 50s19 43 43 43c23 0 43-20 43-43z"></path><path fill="none" stroke="#CF2F00" stroke-width=".5" d="M26 33h10l14 29 14-29h10L55 74H45z"></path><path fill="#FEFF5D" d="M26 33h10l14 29 14-29h10L55 74H45z"></path></svg></a>
 					<div class="post-title">
 						<h2><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>
-						<span><time datetime="<?php $this->date('c'); ?>"><?php $this->date('Y-m-d'); ?></time></span>
+						<span><time datetime="<?php $this->date('c'); ?>"><?php echo get_humanized_date($this->created); ?></time></span>
 						<span class="category"><?php $this->category(','); ?></span>
 					</div>
 					<button class="post-action loft-btn" title="“选项”菜单"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" class="svg-inline--fa fa-chevron-down fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg></button>

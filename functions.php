@@ -41,7 +41,7 @@ function themeConfig(Typecho_Widget_Helper_Layout $form) {
     $form->addInput($blogFace);
     $blogDec = new Typecho_Widget_Helper_Form_Element_Text('blogDec', NULL, NULL, _t('一句话'), _t('显示在右侧头像作者名字下面的一句话，简明精要。'));
     $form->addInput($blogDec);
-    $blogDate = new Typecho_Widget_Helper_Form_Element_Text('blogDate', NULL, NULL, _t('建博时间'), _t('显示在右侧作者一句话下面。'));
+    $blogDate = new Typecho_Widget_Helper_Form_Element_Text('blogDate', NULL, NULL, _t('建博时间'), _t('显示在右侧作者一句话下面，格式1901-08-08。'));
     $form->addInput($blogDate);
 
     $tencentQQ = new Typecho_Widget_Helper_Form_Element_Text('tencentQQ', NULL, NULL, _t('QQ:'), _t('你的QQ号码'));
@@ -333,4 +333,35 @@ function theme_options_backup(){
     <input type="submit" name="type" class="btn primary" value="创建备份" />
     <input type="submit" name="type" class="btn primary" value="还原备份" />
     <input type="submit" name="type" class="btn primary" value="删除备份" /></form></div>';
+}
+/** 
+ * 人性化日期
+ * @param $created 日期
+ * @return string   xx 前
+ */
+function get_humanized_date(int $created){
+  if (Helper::options()->timeFormat != "") {
+    return date(Helper::options()->timeFormat, $created);
+  } else {
+    //计算时间差
+    $diff = time() - $created;
+    $d = floor($diff / 3600 / 24);
+
+    $Y = date("Y", $created);
+
+    //输出时间
+    if (date("Y-m-d", $created) == date("Y-m-d")) {
+      return "今天";
+    } elseif ($d <= 1) {
+      return "昨天";
+    } elseif ($d == 2) {
+      return "前天";
+    } elseif ($d <= 31) {
+      return $d . " 天前";
+    } elseif ($Y == date("Y")) {
+      return date("m-d", $created);
+    } else {
+      return date("Y-m-d", $created);
+    }
+  }
 }
