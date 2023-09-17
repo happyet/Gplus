@@ -365,3 +365,72 @@ function get_humanized_date(int $created){
     }
   }
 }
+/**全站字数统计**/
+function get_blog_txtnum() {
+    $db = Typecho_Db::get();
+    $create = $db->fetchRow($db->select('created')->from('table.contents')->where('table.contents.type != ?', 'attachment')->limit('1')->order('created',Typecho_Db::SORT_DESC));
+    $update = $db->fetchRow($db->select('modified')->from('table.contents')->where('table.contents.type != ?', 'attachment')->limit('1')->order('modified',Typecho_Db::SORT_DESC));
+    $set_time = ($create>=$update) ? $create['modified'] : $update['modified'];
+
+    $Characters = Typecho_Cookie::get('site_Characters');
+    if($Characters){
+        $Characters = json_decode($Characters,true);
+        if($Characters['set'] <> $set_time){
+            $chars = 0;
+            $select = $db ->select('text')->from('table.contents')->where('table.contents.type != ?', 'attachment');
+            $rows = $db->fetchAll($select);
+            foreach ($rows as $row) {
+                $md = new Markdown();
+                $html_content = $md::convert($row['text']);
+                $html_content = preg_replace("/[^\x{4e00}-\x{9fa5}]/u", "", $html_content); 
+                $chars += mb_strlen(trim($html_content), 'UTF-8');
+            }
+            $unit = '';
+            if($chars >= 10000) {
+                $chars = round($chars /= 10000,2); $unit = 'w'; 
+            }else if($chars >= 1000) {
+                $chars = round($chars /= 1000,2);  $unit = 'k';
+            }
+            $out = array(
+                'num' => $chars.$unit,
+                'set' => $set_time
+            );
+            Typecho_Cookie::set('site_Characters',json_encode($out));
+            $total_num = $out['num'];
+        }else{
+            $total_num = $Characters['num'];
+        }
+    }else{
+        $chars = 0;
+        $select = $db ->select('text')->from('table.contents')->where('table.contents.type != ?', 'attachment');
+        $rows = $db->fetchAll($select);
+        foreach ($rows as $row) {
+            $md = new Markdown();
+            $html_content = $md::convert($row['text']);
+            $html_content = preg_replace("/[^\x{4e00}-\x{9fa5}]/u", "", $html_content); 
+            $chars += mb_strlen(trim($html_content), 'UTF-8');
+        }
+        $unit = '';
+        if($chars >= 10000) {
+            $chars = round($chars /= 10000,2); $unit = 'w'; 
+        }else if($chars >= 1000) {
+            $chars = round($chars /= 1000,2);  $unit = 'k';
+        }
+        $out = array(
+            'num' => $chars.' '.$unit,
+            'set' => $set_time
+        );
+        Typecho_Cookie::set('site_Characters',json_encode($out));
+        $total_num = $out['num'];
+    }
+ 
+    return $total_num;
+}
+/**文章字数统计**/
+function article_txt_count ($cid){ 
+    $db=Typecho_Db::get (); 
+    $rs=$db->fetchRow ($db->select ('table.contents.text')->from ('table.contents')->where ('table.contents.cid=?',$cid)->order ('table.contents.cid',Typecho_Db::SORT_ASC)->limit (1)); 
+    $text = preg_replace("/[^\x{4e00}-\x{9fa5}]/u", "", $rs['text']); 
+    
+    echo mb_strlen($text,'UTF-8'); 
+}

@@ -39,11 +39,13 @@
 				}else{
 					echo '网海沉浮 ' .$day_pass. ' 天';
 				}
+				echo '，留下 '. get_blog_txtnum() .' 字。';
 			}else{
 				echo '猴年马月 加入独立博客'; 
 			}?></p>
 		</div>
 	</section>
+
 	<?php if (!empty($this->options->sidebarBlock) && in_array('ShowCategory', $this->options->sidebarBlock)): ?>
 		<section class="widget loft-inner">
 			<h3 class="widget-title"><?php _e('分类栏目'); ?></h3>
@@ -84,7 +86,8 @@
 		<section class="widget loft-inner">
 			<h3 class="widget-title"><?php _e('最近回复'); ?></h3>
 			<ul class="widget-list recent-comments">
-			<?php $this->widget('Widget_Comments_Recent','ignoreAuthor=true&pageSize=5')->to($comments); ?>
+			<?php $this->widget('Widget_Comments_Recent','pageSize=10&ignoreAuthor=true')->to($comments); ?>
+			<?php //\Widget\Comments\Recent::alloc()->to($comments); ?>
 			<?php while($comments->next()): ?>
 				<li>
 					<img class="avatar" src="<?php getAvatarByEmail($comments->mail,45); ?>">
