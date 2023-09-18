@@ -417,7 +417,7 @@ function get_blog_txtnum() {
             $chars = round($chars /= 1000,2);  $unit = 'k';
         }
         $out = array(
-            'num' => $chars.' '.$unit,
+            'num' => $chars.$unit,
             'set' => $set_time
         );
         Typecho_Cookie::set('site_Characters',json_encode($out));
