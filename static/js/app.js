@@ -12,6 +12,7 @@ jQuery(document).ready(function($){
 		if($('.site-nav').hasClass('on')) $('.site-nav').removeClass('on');
 	});
 	window.ViewImage && ViewImage.init('.entry img');
+	$('.entry a').attr('target','_blank');
 	//  点赞按钮点击
 	$('#agree').on('click', function () {
 		if($(this).prop('disabled') == true){
@@ -47,7 +48,7 @@ jQuery(document).ready(function($){
 	});
 	$('#realavatar').on('click',function(){
 		$('#cabg').show();
-		$('#comment_form').removeClass('loft-inner');
+		$('#comment_form, .comment-loft-inner').removeClass('loft-inner');
 		$('#commentauthorinfo').fadeIn(500);
 	});
 	$('#caok').on('click',function(){
@@ -78,7 +79,7 @@ jQuery(document).ready(function($){
 	});
 	$('#commentauthorinfo .close,#cabg').on('click',function(){
 		$('#commentauthorinfo').hide();
-		$('#comment_form').addClass('loft-inner');
+		$('#comment_form, .comment-loft-inner').addClass('loft-inner');
 		$('#cabg').hide();
 	});
 	$('#comment').focus(function(){
@@ -90,6 +91,7 @@ jQuery(document).ready(function($){
 		if(_val!=''){
 			if(_usrnick == '' || _usrmail == ''){
 				$('#cabg').show();
+				$('#comment_form, .comment-loft-inner').removeClass('loft-inner');
 				$('#commentauthorinfo').fadeIn(500);
 			}
 		}else{
