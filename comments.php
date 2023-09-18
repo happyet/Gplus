@@ -32,8 +32,8 @@ function threadedComments($comments, $singleCommentOptions) {
 	</li>
 <?php }else{ ?>
 	<li id="<?php $comments->theId(); ?>" class="comment comment-body<?php $comments->alt(' comment-odd', ' comment-even');echo ' comment-parent';?>">
-		<article class="comment loft">
-			<div class="loft-inner">
+		<article class="comment-loft loft">
+			<div class="comment-loft-inner loft-inner">
 				<div class="comment-meta loft-head">
 					<span class="loft-img"><img alt="commenter-avatar" src="<?php getAvatarByEmail($comments->mail,50); ?>" class="avatar photo" height="50" width="50"><?php echo $commentbyAuthor; ?></span>
 					<div class="commenter-title">
@@ -80,7 +80,7 @@ function threadedComments($comments, $singleCommentOptions) {
 						<img alt="" src="<?php getAvatarByEmail($this->remember('mail',true)); ?>" class="avatar photo" height="50" width="50">
 					<?php endif; ?>
 				</div>
-				<textarea id="comment" class="txt" name="text" tabindex="4" placeholder="点击右侧头像或者输入评论后点击发布评论输入用户信息。"><?php $this->remember('text'); ?></textarea>		
+				<textarea id="comment" class="txt" name="text" tabindex="4" placeholder="点击右侧头像或者输入评论后点击发布评论输入用户信息。" required><?php $this->remember('text'); ?></textarea>		
 				<p style="text-align:right;">
 					<?php $comments->cancelReply(); ?>
 					<input class="submit" name="submit" type="submit" id="submit" tabindex="5" value="发布评论">
