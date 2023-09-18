@@ -86,7 +86,7 @@
 		<section class="widget loft-inner">
 			<h3 class="widget-title"><?php _e('最近回复'); ?></h3>
 			<ul class="widget-list recent-comments">
-			<?php $this->widget('Widget_Comments_Recent','pageSize=10&ignoreAuthor=true')->to($comments); ?>
+			<?php $this->widget('Widget_Comments_Recent','pageSize=5&ignoreAuthor=true')->to($comments); ?>
 			<?php //\Widget\Comments\Recent::alloc()->to($comments); ?>
 			<?php while($comments->next()): ?>
 				<li>
