@@ -5,7 +5,7 @@
  *
  * @package Gplus 
  * @author LMS
- * @version 3.0.3
+ * @version 3.0.5
  * @link https://muxer.cn/theme/typecho-theme-gplus.html
  */
  
