@@ -74,6 +74,7 @@ jQuery(document).ready(function($){
 				})
 			}
 			$('#commentauthorinfo').hide();
+			$('#comment_form, .comment-loft-inner').addClass('loft-inner');
 			$('#cabg').hide();
 		}
 	});
