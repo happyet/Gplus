@@ -119,7 +119,7 @@ jQuery(document).ready(function($){
 			}
 		}
 	});
-	$('.social .qq, .social .weibo').on('click',function(){
+	$('.social span').not('.weixin').on('click',function(){
 		$link = $(this).attr('data-link');
 		window.open($link);
 	});
