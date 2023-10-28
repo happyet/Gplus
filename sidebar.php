@@ -1,5 +1,4 @@
 <aside id="sidebar">
-
 	<section class="widget loft-inner about-author">
 		<div class="author-bg" style="background:url(<?php echo $this->options->authorBg ? $this->options->authorBg : $this->options->themeUrl.'/static/images/bg.png'; ?>) no-repeat;background-size:cover;">
 			<div class="social">
